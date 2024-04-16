@@ -19,9 +19,9 @@ class Reserva(models.Model):
         return f"{self.nombre_de_usuario} - Mesa:{self.mesa.numero} - {self.fecha}"
     
 class Mesero(models.Model):
-    nombre_de_usuario = models.CharField(max_length=50)
-    mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, related_name='meseros')
+    nombre = models.CharField(max_length=50)
+    mesa_asignada = models.ForeignKey(Mesa, on_delete=models.CASCADE, related_name='meseros')
     
     def __str__(self):
-        return f"{self.nombre_de_usuario} - Asignado mesa:{self.mesa.numero}"
+        return f"{self.nombre} - Asignado mesa: {self.mesa_asignada.numero}"
 
