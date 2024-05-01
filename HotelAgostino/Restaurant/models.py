@@ -1,5 +1,14 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+
+
+class Avatar(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="avatar")
+    image = models.ImageField(upload_to="avatars/")
+    
+    def __str__(self):
+        return f"Avatar for {self.user.username}"
 
 class Mesa(models.Model):
     numero = models.IntegerField()
@@ -10,7 +19,7 @@ class Mesa(models.Model):
         return f"Mesa: {self.numero} - {'Disponible' if self.disponible else 'No Disponible'} - Capacidad: {self.capacidad}"
     
 class Reserva(models.Model):
-    nombre_de_usuario = models.CharField(max_length=50)
+    nombre_de_usuario = models.ForeignKey(User,on_delete=models.CASCADE )
     mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, related_name='reservas')
     fecha = models.DateField(default=timezone.now)
     hora_inicio = models.TimeField(default=timezone.now)

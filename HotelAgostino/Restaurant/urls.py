@@ -1,9 +1,17 @@
 from django.urls import path, include
-from .views import home_view, ReservaCreateView, ReservaListView, ReservaDetailView, ReservaUpdateView, ReservaDeleteView, reserva_busqueda, MesaCreateView, MesaListView, MesaUpdateView, MesaDeleteView, mesa_busqueda, MeseroCreateView, MeseroListView, MeseroUpdateView, MeseroDeleteView
+from .views import home_view, ReservaCreateView, ReservaListView, ReservaDetailView, ReservaUpdateView, ReservaDeleteView, reserva_busqueda, MesaCreateView, MesaListView, MesaUpdateView, MesaDeleteView, mesa_busqueda, MeseroCreateView, MeseroListView, MeseroUpdateView, MeseroDeleteView, user_creation_view, user_login_view, user_logout_view, UserUpdateView, avatar_view, menu_view, about_view
 
 urlpatterns = [
+    path("", home_view, name="home"),
+    path("menu", menu_view, name="menu"),
+    path("about-me", about_view, name="about-me"),
+    path("crear-usuario", user_creation_view, name="crear-usuario"),
+    path("login", user_login_view, name="login"),
+    path("logout", user_logout_view, name="logout"),
+    path("user-edit", UserUpdateView.as_view(), name="user-edit"),
+    path("avatar", avatar_view , name="avatar"),
+    
     # RESERVA/
-    path("", home_view),
     path("reserva/create", ReservaCreateView.as_view(), name="reserva-crear" ),
     path("reserva/list", ReservaListView.as_view(), name="reserva-lista"),
     path("reserva/<int:pk>/detail", ReservaDetailView.as_view(), name="reserva-detalle"),

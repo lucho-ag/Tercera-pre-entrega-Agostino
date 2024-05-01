@@ -1,9 +1,25 @@
 {% extends 'Restaurant/base.html' %}
 
-{% block title %} Restaurant {% endblock title %}
+{% block title %}Restaurant{% endblock title %}
 
 {% block content %}
-<section>
-    <h2>Bienvendios a la home de Restaurant!</h2>
+
+{% if user.is_authenticated %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Bienvenido al Restaurante del HotelAgostino</h1>
+        <p>Explora nuestro delicioso menu!</p>
+        <a href="{% url 'menu' %}" class="btn btn-primary">Ver Menu</a>
+    </div>
 </section>
+{% else %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Bienvenido al Restaurante del HotelAgostino</h1>
+        <p>Crea un usuario o inicia sesion para ver todas nuestras caracteristicas!</p>
+        <a href="{% url 'crear-usuario' %}" class="btn btn-primary">Crear usuario</a>
+        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+    </div>
+</section>
+{% endif %}
 {% endblock %}
